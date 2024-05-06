@@ -1,0 +1,39 @@
+{
+  "name": "Litter-Robot",
+  "docs": "https://github.com/jamespauly/udi-litter-robot-poly",
+  "url": "https://github.com/jamespauly/udi-litter-robot-poly.git",
+  "branch": "dev",
+  "type": "python3",
+  "executable": "litterrobot-poly.py",
+  "install": "install.sh",
+  "install_cloud": "install_cloud.sh",
+  "description": "Litter-Robot: A Node Server for Controlling a Litter Robot",
+  "notice": "",
+  "shortPoll": "60",
+  "longPoll": "600",
+  "logLevel": "INFO",
+  "devMode": true,
+  "profile_version": "3.0.0",
+  "developer": "James Paul",
+  "customParams": {
+  },
+  "credits": [
+    {
+      "title": "Litter-Robot: A Node Server for Controlling a Litter Robot",
+      "author": "James Paul",
+      "version": "1.0.1",
+      "date": "May 2nd, 2024",
+      "source": "https://github.com/jamespauly/udi-litter-robot-poly.git",
+      "license": "https://github.com/jamespauly/udi-litter-robot-poly/blob/main/LICENSE"
+    }
+  ],
+  "store": {
+    "developer": "jgpaul16@gmail.com",
+    "purchaseOptions": [
+      {
+        "isPerpetual": true,
+        "price": 0.00
+      }
+    ]
+  }
+}
