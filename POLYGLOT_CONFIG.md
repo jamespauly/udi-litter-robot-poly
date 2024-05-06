@@ -1,3 +1,4 @@
-# Tuya Node Server Custom Parameters
+# Litter Robot Node Server Custom Parameters
 
-* <b>devices (Optional)</b> - JSON formatted device list
+* <b>username</b> - Litter Robot Username
+* <b>password</b> - Litter Robot Password

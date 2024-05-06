@@ -1,4 +1,5 @@
 import asyncio
+import time
 
 import udi_interface
 from nodes import LitterRobot4Node
@@ -26,6 +27,14 @@ class LitterRobotController(udi_interface.Node):
 
         self.poly.ready()
         self.poly.addNode(self)
+
+    def node_queue(self, data):
+        self.n_queue.append(data['address'])
+
+    def wait_for_node_event(self):
+        while len(self.n_queue) == 0:
+            time.sleep(0.1)
+        self.n_queue.pop()
 
     def parameter_handler(self, params):
         self.Notices.clear()
@@ -73,6 +82,7 @@ class LitterRobotController(udi_interface.Node):
                     if self.poly.getNode(robot.serial) is None:
                         LOGGER.info(f'Adding Node {robot.serial} - {robot.name}')
                         self.poly.addNode(LitterRobot4Node(self.poly, self.address, robot.serial, robot.name, robot))
+                        self.wait_for_node_event()
                     else:
                         LitterRobot_node = self.poly.getNode(robot.serial)
                         LitterRobot_node.query()
@@ -88,7 +98,7 @@ class LitterRobotController(udi_interface.Node):
     def stop(self):
         LOGGER.info('LitterRobot NodeServer stopped.')
 
-    id = 'LitterRobot'
+    id = 'litterrobot'
     commands = {
         'DISCOVER': discover
     }
