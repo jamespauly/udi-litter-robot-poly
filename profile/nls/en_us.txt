@@ -5,13 +5,22 @@ CMD-litterrobotnls-DISCOVER-NAME = Discover
 ST-litterrobotnls-ST-NAME = Litter-Robot NodeServer Running
 
 # litterrobotnodetype
-ND-litterrobotnode4-NAME = Litter-Robot 4 Node
-ND-litterrobotnode4-ICON = Input
-ST-litterrobotnode4nls-ST-NAME = Litter-Robot 4 Node Active
-ST-litterrobotnode4nls-GV0-NAME = Litter Level
-ST-litterrobotnode4nls-GV1-NAME = Waste Level
-ST-litterrobotnode4nls-GV2-NAME = Waste Cycles
-ST-litterrobotnode4nls-GV3-NAME = Robot Status
+ND-lrnode4-NAME = Litter-Robot 4 Node
+ND-lrnode4-ICON = Input
+ST-lrnode4nls-ST-NAME = Litter-Robot 4 Node Active
+ST-lrnode4nls-GV0-NAME = Litter Level
+ST-lrnode4nls-GV1-NAME = Waste Level
+ST-lrnode4nls-GV2-NAME = Waste Cycles
+ST-lrnode4nls-GV3-NAME = Robot Status
+ST-lrnode4nls-GV4-NAME = Globe Light
+ST-lrnode4nls-GV5-NAME = Globe Brightness
+ST-lrnode4nls-GV6-NAME = Panel Brightness
+ST-lrnode4nls-GV7-NAME = Panel Locked
+ST-lrnode4nls-GV8-NAME = Litter Box Wait Time
+CMD-lrnode4nls-GLOBE_LIGHT_MODE-NAME = Globe Light Mode
+CMD-lrnode4nls-GLOBE_LIGHT_BRIGHT-NAME = Globe Light Brightness
+CMD-lrnode4nls-PANEL_LIGHT_BRIGHT-NAME = Panel Light Brightness
+CMD-lrnode4nls-LITTER_BOX_WAIT_TIME-NAME = Litter Box Wait Time
 
 IR4S-0 = Bonnet Removed
 IR4S-1 = Clean Cycle Complete
@@ -39,3 +48,14 @@ IR4S-22 = Cat Sensor Fault At Startup
 IR4S-23 = Drawer Full At Startup
 IR4S-24 = Pinch Detect At Startup
 IR4S-25 = Unknown
+
+IR4G-0 = Off
+IR4G-1 = On
+IR4G-2 = Auto
+
+IR4GB-25 = Low
+IR4GB-50 = Medium
+IR4GB-100 = High
+
+IR4P-0 = Off
+IR4P-1 = On

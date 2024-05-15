@@ -16,9 +16,10 @@ class LitterRobotController(udi_interface.Node):
         self.name = name
         self.primary = primary
         self.address = address
+        self.n_queue = []
 
-        self.Notices = Custom(polyglot, 'notices')
-        self.Parameters = Custom(polyglot, 'customparams')
+        self.notices = Custom(polyglot, 'notices')
+        self.parameters = Custom(polyglot, 'customparams')
         self.custom_data = Custom(polyglot, 'customdata')
 
         self.poly.subscribe(self.poly.START, self.start, address)
@@ -37,34 +38,34 @@ class LitterRobotController(udi_interface.Node):
         self.n_queue.pop()
 
     def parameter_handler(self, params):
-        self.Notices.clear()
-        self.Parameters.load(params)
+        self.notices.clear()
+        self.parameters.load(params)
 
         userValid = False
         passwordValid = False
 
-        if self.Parameters['username'] is not None and len(self.Parameters['username']) > 0:
+        if self.parameters['username'] is not None and len(self.parameters['username']) > 0:
             userValid = True
         else:
             LOGGER.error('username is Blank')
-        if self.Parameters['password'] is not None and len(self.Parameters['password']) > 0:
+        if self.parameters['password'] is not None and len(self.parameters['password']) > 0:
             passwordValid = True
         else:
             LOGGER.error('password is Blank')
 
-        self.Notices.clear()
+        self.notices.clear()
 
         if userValid and passwordValid:
-            self.discover()
+            asyncio.run(self.discover())
 
     def start(self):
-        LOGGER.info('Staring LitterRobot NodeServer')
+        LOGGER.info('Starting LitterRobot NodeServer')
         self.poly.updateProfile()
         self.poly.setCustomParamsDoc()
 
     def query(self, command=None):
         LOGGER.info("Query sensor {}".format(self.address))
-        self.discover()
+        asyncio.run(self.discover())
 
     async def discover(self, *args, **kwargs):
         LOGGER.info("Starting LitterRobot Device Discovery")
@@ -72,21 +73,23 @@ class LitterRobotController(udi_interface.Node):
 
         try:
             # Connect to the API and load robots.
-            await account.connect(username=self.Parameters['username'], password=self.Parameters['password'],
+            await account.connect(username=self.parameters['username'], password=self.parameters['password'],
                                   load_robots=True)
 
             self.custom_data.load(account.session.tokens, True)
 
             for robot in account.robots:
                 if isinstance(robot, LitterRobot4):
-                    if self.poly.getNode(robot.serial) is None:
-                        LOGGER.info(f'Adding Node {robot.serial} - {robot.name}')
-                        self.poly.addNode(LitterRobot4Node(self.poly, self.address, robot.serial, robot.name, robot))
+                    node_address = self.poly.getValidAddress(robot.serial)
+                    node_name = self.poly.getValidName(robot.name)
+                    if self.poly.getNode(node_address) is None:
+                        LOGGER.info(f'Adding Node {node_address} - {node_name}')
+                        self.poly.addNode(LitterRobot4Node(self.poly, self.address, node_address, node_name, robot.id, self.parameters['username'], self.parameters['password']))
                         self.wait_for_node_event()
                     else:
-                        LitterRobot_node = self.poly.getNode(robot.serial)
+                        LitterRobot_node = self.poly.getNode(node_address)
                         LitterRobot_node.query()
-                        LOGGER.info(f'Node {robot.serial} - {robot.names} already exists, skipping')
+                        LOGGER.info(f'Node {node_address} - {node_name} already exists, skipping')
         finally:
             await account.disconnect()
 
@@ -100,7 +103,7 @@ class LitterRobotController(udi_interface.Node):
 
     id = 'litterrobot'
     commands = {
-        'DISCOVER': discover
+        'DISCOVER': query
     }
 
     drivers = [

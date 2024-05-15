@@ -1,1 +1,2 @@
 from .LitterRobot4Status import LitterRobot4Status
+from .LitterRobot4GlobeStatus import LitterRobot4GlobeStatus

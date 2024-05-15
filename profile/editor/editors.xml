@@ -4,12 +4,24 @@
         <range uom="2" subset="0,1"/>
     </editor>
     <editor id="F_PERCENT">
-        <range uom="51" min="0" max="100" step="1" />
+        <range uom="51" min="0" max="100" step="1"/>
     </editor>
     <editor id="I_CYCLE_COUNT">
         <range uom="0" min="0" max="100000" step="1"/>
     </editor>
     <editor id="I_LITTER_ROBOT_4_STATUS">
         <range uom="25" subset="0-25" nls="IR4S"/>
+    </editor>
+    <editor id="I_LITTER_ROBOT_4_GLOBE_MODE">
+        <range uom="25" subset="0-2" nls="IR4G"/>
+    </editor>
+    <editor id="I_LITTER_ROBOT_4_BRIGHT">
+        <range uom="25" subset="25,50,100" nls="IR4GB"/>
+    </editor>
+    <editor id="I_LITTER_ROBOT_4_GLOBE_POWER">
+        <range uom="25" subset="0-1" nls="IR4P"/>
+    </editor>
+    <editor id="I_LITTER_ROBOT_4_WAIT_TIME">
+        <range uom="45" subset="3,7,15,25,30"/>
     </editor>
 </editors>

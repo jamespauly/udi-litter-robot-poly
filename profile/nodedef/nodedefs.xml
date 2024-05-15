@@ -12,16 +12,33 @@
             </accepts>
         </cmds>
     </nodeDef>
-    <nodeDef id="litterrobotnode" nls="litterrobotnodenls">
+    <nodeDef id="lrnode4" nls="lrnode4nls">
         <editors/>
         <sts>
             <st id="GV0" editor="F_PERCENT"/>
             <st id="GV1" editor="F_PERCENT"/>
             <st id="GV2" editor="I_CYCLE_COUNT"/>
             <st id="GV3" editor="I_LITTER_ROBOT_4_STATUS"/>
+            <st id="GV4" editor="I_LITTER_ROBOT_4_GLOBE_MODE"/>
+            <st id="GV5" editor="I_LITTER_ROBOT_4_BRIGHT"/>
+            <st id="GV6" editor="I_LITTER_ROBOT_4_BRIGHT"/>
+            <st id="GV7" editor="bool"/>
+            <st id="GV8" editor="I_LITTER_ROBOT_4_WAIT_TIME"/>
         </sts>
         <cmds>
                 <accepts>
+                    <cmd id="GLOBE_LIGHT_MODE">
+                        <p id="" editor="I_LITTER_ROBOT_4_GLOBE_MODE" init="GV4"/>
+                    </cmd>
+                    <cmd id="GLOBE_LIGHT_BRIGHT">
+                        <p id="" editor="I_LITTER_ROBOT_4_BRIGHT" init="GV5"/>
+                    </cmd>
+                    <cmd id="PANEL_LIGHT_BRIGHT">
+                        <p id="" editor="I_LITTER_ROBOT_4_BRIGHT" init="GV6"/>
+                    </cmd>
+                    <cmd id="LITTER_BOX_WAIT_TIME">
+                        <p id="" editor="I_LITTER_ROBOT_4_WAIT_TIME" init="GV8"/>
+                    </cmd>
                     <cmd id="QUERY"/>
                 </accepts>
         </cmds>
